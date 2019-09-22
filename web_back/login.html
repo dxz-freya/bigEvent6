@@ -51,7 +51,7 @@
     </div>
   </div>
 
- 
+
   <script src="./js/lib/jquery-1.12.4.min.js"></script>
   <script src="./js/bootstrap/js/bootstrap.min.js"></script>
   <script>
@@ -62,32 +62,26 @@
     // 3. 根据结果给反馈
 
     $('#btnLogin').click(function () {
-          //获取用户输入的用户名及密码
-          var userName = $('#userName').val()
-          var password = $('#password').val()
-          // console.log(userName,password)
-          if (userName === '' || password === '') {
-            // 如果输入有空，进行提示用户名及密码不能为空
-            $("#pResult").html('用户名及密码不能为空！');
-            // 将错误弹窗显示出来
-            $('.modal').modal('show');
+      //获取用户输入的用户名及密码
+      var userName = $('#userName').val()
+      var password = $('#password').val()
+      // console.log(userName,password)
+      if (userName === '' || password === '') {
+        // 如果输入有空，进行提示用户名及密码不能为空
+        $("#pResult").html('用户名及密码不能为空！');
+        // 将错误弹窗显示出来
+        $('.modal').modal('show');
+      } else {
+        user.login(userName, password, function (res) {
+          if (res.code == 200) {
+            window.location.href = "./index.html";
           } else {
-            $.post('http://localhost:8000/admin/login', {
-                user_name: userName,
-                password: password
-              },
-              function (res) {
-                console.log(res)
-                if (res.code == 200) {
-                  // alert('正确')
-                  window.location.href="./index.html";
-                } else {
-                  $("#pResult").html(res.msg);
-                  $('.modal').modal('show');
-                }
-              })
-            }
-          })
+            $("#pResult").html(res.msg);
+            $('.modal').modal('show');
+          }
+        });
+      }
+    })
 
 
 
@@ -95,28 +89,28 @@
 
 
 
-        // $('#btnLogin').click(function() {
-        //   var userName = $('#userName').val();
-        //   var password = $('#password').val();
-        //   console.log(userName, password);
-        //   if (userName === '' || password === '') {
-        //     $('#pResult').html('用户名和密码不能为空！');
-        //     $('.modal').modal('show');
-        //     //   alert('心太大了');
-        //   } else {
-        //     user.login(userName, password, function(res) {
-        //       console.log(res);
-        //       if (res.code === 200) {
-        //         //   alert('ok');
-        //         window.location.href = './index.html';
-        //       } else {
-        //         //   alert(res.msg);
-        //         $('#pResult').html(res.msg);
-        //         $('.modal').modal('show');
-        //       }
-        //     });
-        //   }
-        // });
+    // $('#btnLogin').click(function() {
+    //   var userName = $('#userName').val();
+    //   var password = $('#password').val();
+    //   console.log(userName, password);
+    //   if (userName === '' || password === '') {
+    //     $('#pResult').html('用户名和密码不能为空！');
+    //     $('.modal').modal('show');
+    //     //   alert('心太大了');
+    //   } else {
+    //     user.login(userName, password, function(res) {
+    //       console.log(res);
+    //       if (res.code === 200) {
+    //         //   alert('ok');
+    //         window.location.href = './index.html';
+    //       } else {
+    //         //   alert(res.msg);
+    //         $('#pResult').html(res.msg);
+    //         $('.modal').modal('show');
+    //       }
+    //     });
+    //   }
+    // });
   </script>
 </body>
 
